@@ -1,4 +1,19 @@
 
+### PLEX INSTALLATION
+docker run -d \
+  --name=plex \
+  --net=host \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=GMT/UTC \
+  -e VERSION=docker \
+  -e PLEX_CLAIM=claim-pTiHynGPAs2J7zWLfGY8 \
+  -v /volume1/docker/plex/data:/config \
+  -v /volume1/docker/mediaServer/Media/tv:/tv \
+  -v /volume1/docker/mediaServer/Media/movies:/movies \
+  --restart unless-stopped \
+  lscr.io/linuxserver/plex:latest
+
 ### RADARR INSTALLATION
 docker run -d \
   --name=radarr \

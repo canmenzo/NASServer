@@ -1,6 +1,22 @@
 ### NASServer
 
 - This is my NAS Server project.
+  - I will be showing how to install `Prowlarr`, `Radarr`, `Sonarr`, `qBittorrent`, `Overseerr`, `Plex`.
 
-
-- I will be showing how to install `Prowlarr`, `Radarr`, `Sonarr`, `qBittorrent`, `Overseerr`.
+### Instructions
+- Plex
+    generate 2 api key for radarr and sonarr
+- radarr
+    settings - connect - add jellyfin's api
+    settings - download clients - qbittorent's username and password
+- sonarr
+    settings - connect - add jellyfin's api
+    settings - download clients - qbittorent's username and password
+- prowlarr
+    settings - apps - add radarr's api
+    settings - apps - add sonarr's api
+- qbittorent
+    check logs for admin password | username is admin
+- overseerr
+    go to radar and sonarr (settings-general), generate api
+    when you set-up jellyfish add radar and sonar settings with the said api 
