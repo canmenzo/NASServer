@@ -1,31 +1,20 @@
 
 
 
-### Prowlar Docker initate.
-
-docker run -d \
-  --name=prowlarr \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=GMT/UTC \
-  -p 9696:9696 \
-  -v /volume1/docker/prowlarr/data:/config \
-  --restart unless-stopped \
-  lscr.io/linuxserver/prowlarr:latest
-
-### Radarr Docker initiate.
-
-docker run -d \
-  --name=radarr \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=GMT/UTC \
-  -p 7878:7878 \
-  -v /volume1/docker/radarr/data:/config \
-  -v /volume1/docker/Media/movies:/movies
-  -v /volume1/docker/Media/downloads:/downloads
-  --restart unless-stopped \
-  lscr.io/linuxserver/radarr:latest
+---
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=GMT/UTC
+    volumes:
+      - /volume1/docker/prowlarr/data:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
 
 ---
 services:
@@ -37,7 +26,7 @@ services:
       - PGID=1000
       - TZ=GMT/UTC
     volumes:
-      - /volume1/docker/radarr/config:/config
+      - /volume1/docker/radarr/data:/config
       - /volume1/docker/Media/movies:/movies
       - /volume1/docker/Media/downloads:/downloads
     ports:
@@ -54,7 +43,7 @@ services:
       - PGID=1000
       - TZ=GMT/UTC
     volumes:
-      - /volume1/docker/mediaServer/sonarr/config:/config
+      - /volume1/docker/mediaServer/sonarr/data:/config
       - /volume1/docker/mediaServer/Media/tv:/tv
       - /volume1/docker/mediaServer/Media/downloads:/downloads
     ports:
@@ -72,7 +61,7 @@ services:
       - WEBUI_PORT=8080
       - TZ=GMT/UTC
     volumes:
-      - /volume1/docker/mediaServer/qbittorent/config:/config
+      - /volume1/docker/mediaServer/qbittorent/data:/config
       - /volume1/docker/mediaServer/Media/downloads:/downloads
     ports:
       - 8080:8080
@@ -90,7 +79,7 @@ services:
       - PGID=1000
       - TZ=GMT/UTC
     volumes:
-      - /volume1/docker/mediaServer/overseerr/config:/config
+      - /volume1/docker/mediaServer/overseerr/data:/config
     ports:
       - 5055:5055
     restart: unless-stopped
