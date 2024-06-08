@@ -1,7 +1,8 @@
 ### NASServer
 
 - This is my NAS Server project.
-  - I will be showing how to install `Prowlarr`, `Radarr`, `Sonarr`, `qBittorrent`, `Overseerr`, `Plex`,
+  - In this repo, I'll document the installation instructions for CLI as well as docker compose for the following softwARRs:
+    - `Prowlarr`, `Radarr`, `Sonarr`, `qBittorrent`, `Overseerr`, `Plex`,
 
 ### Instructions
 - Plex
