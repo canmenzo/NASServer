@@ -30,8 +30,7 @@ services:
       - TZ=GMT/UTC
     volumes:
       - /volume1/docker/radarr/data:/config
-      - /volume1/docker/Media/movies:/movies
-      - /volume1/docker/Media/downloads:/downloads
+      - /volume1/docker/mediaServer/Media:/data
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -47,8 +46,7 @@ services:
       - TZ=GMT/UTC
     volumes:
       - /volume1/docker/mediaServer/sonarr/data:/config
-      - /volume1/docker/mediaServer/Media/tv:/tv
-      - /volume1/docker/mediaServer/Media/downloads:/downloads
+      - /volume1/docker/mediaServer/Media:/data
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -65,7 +63,7 @@ services:
       - TZ=GMT/UTC
     volumes:
       - /volume1/docker/mediaServer/qbittorent/data:/config
-      - /volume1/docker/mediaServer/Media/downloads:/downloads
+      - /volume1/docker/mediaServer/Media:/data
     ports:
       - 8080:8080
       - 6881:6881

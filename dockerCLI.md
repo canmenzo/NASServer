@@ -9,6 +9,7 @@
 
 
 ### PLEX INSTALLATION
+// Get PLEX_CLAIM from https://plex.tv/claim - it expires 4 minutes after you copy it
 docker run -d \
   --name=plex \
   --net=host \
@@ -16,10 +17,9 @@ docker run -d \
   -e PGID=1000 \
   -e TZ=GMT/UTC \
   -e VERSION=docker \
-  -e PLEX_CLAIM=claim-pTiHynGPAs2J7zWLfGY8 \
+  -e PLEX_CLAIM=claim-xxxxxxxxxxxxxxxxxxxx \
   -v /volume1/docker/plex/data:/config \
-  -v /volume1/docker/mediaServer/Media/tv:/tv \
-  -v /volume1/docker/mediaServer/Media/movies:/movies \
+  -v /volume1/docker/mediaServer/Media:/data \
   --restart unless-stopped \
   lscr.io/linuxserver/plex:latest
 
@@ -31,8 +31,7 @@ docker run -d \
   -e TZ=GMT/UTC \
   -p 7878:7878 \
   -v /volume1/docker/radarr/data:/config \
-  -v /volume1/docker/mediaServer/Media/movies:/movies \
-  -v /volume1/docker/mediaServer/Media/downloads:/downloads \
+  -v /volume1/docker/mediaServer/Media:/data \
   --restart unless-stopped \
   lscr.io/linuxserver/radarr:latest
 
@@ -67,8 +66,7 @@ docker run -d \
   -e TZ=GMT/UTC \
   -p 8989:8989 \
   -v /volume1/docker/sonarr/data:/config \
-  -v /volume1/docker/mediaServer/Media/tv:/tv \
-  -v /volume1/docker/mediaServer/Media/downloads:/downloads \
+  -v /volume1/docker/mediaServer/Media:/data \
   --restart unless-stopped \
   lscr.io/linuxserver/sonarr:latest
 
@@ -85,6 +83,6 @@ docker run -d \
   -p 6881:6881 \
   -p 6881:6881/udp \
   -v /volume1/docker/qbittorent/data:/config \
-  -v /volume1/docker/mediaServer/Media/downloads:/downloads \
+  -v /volume1/docker/mediaServer/Media:/data \
   --restart unless-stopped \
   lscr.io/linuxserver/qbittorrent:latest

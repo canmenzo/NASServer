@@ -1,18 +1,12 @@
 # Media stack: qBittorrent + Sonarr + Radarr
 #
-# All three mount ONE parent directory (Media -> /data) rather than separate
-# /downloads, /tv and /movies mounts. Hardlinks cannot cross mount points
-# inside a container, so with split mounts every import is a full file copy -
-# double disk usage and the torrent stops seeding the imported copy. With a
-# single mount, imports are instant and cost nothing.
-#
-# On disk:
-#   Media/downloads   ->  /data/downloads   (qBittorrent save path)
-#   Media/tv          ->  /data/tv          (Sonarr root folder)
-#   Media/movies      ->  /data/movies      (Radarr root folder)
+# All three mount the Media directory once, as /data:
+#   Media/downloads  ->  /data/downloads   (qBittorrent save path)
+#   Media/tv         ->  /data/tv          (Sonarr root folder)
+#   Media/movies     ->  /data/movies      (Radarr root folder)
 #
 # Set PUID/PGID to the owner of Media - `id <user>` gives the numbers.
-# No secrets live here: API keys are generated in each app's own UI.
+# No secrets here: API keys are generated in each app's own UI.
 
 services:
   qbittorrent:
