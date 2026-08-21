@@ -1,0 +1,62 @@
+# Media stack: qBittorrent + Sonarr + Radarr
+#
+# All three mount ONE parent directory (Media -> /data) rather than separate
+# /downloads, /tv and /movies mounts. Hardlinks cannot cross mount points
+# inside a container, so with split mounts every import is a full file copy -
+# double disk usage and the torrent stops seeding the imported copy. With a
+# single mount, imports are instant and cost nothing.
+#
+# On disk:
+#   Media/downloads   ->  /data/downloads   (qBittorrent save path)
+#   Media/tv          ->  /data/tv          (Sonarr root folder)
+#   Media/movies      ->  /data/movies      (Radarr root folder)
+#
+# Set PUID/PGID to the owner of Media - `id <user>` gives the numbers.
+# No secrets live here: API keys are generated in each app's own UI.
+
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=GMT/UTC
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - /volume1/docker/qbittorent/data:/config
+      - /volume1/docker/mediaServer/Media:/data
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=GMT/UTC
+    volumes:
+      - /volume1/docker/sonarr/data:/config
+      - /volume1/docker/mediaServer/Media:/data
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1026
+      - PGID=101
+      - TZ=GMT/UTC
+    volumes:
+      - /volume1/docker/radarr/data:/config
+      - /volume1/docker/mediaServer/Media:/data
+    ports:
+      - 7878:7878
+    restart: unless-stopped

@@ -37,6 +37,38 @@ Before using the `docker.md` files in this repo, there are a few key things to u
 
 ---
 
+## 🔗 Mount one parent, not three
+
+[`docker-compose.yml`](./docker-compose.yml) is the live config for qBittorrent, Sonarr and
+Radarr. The important part is that all three mount a **single** parent directory:
+
+```yaml
+- /volume1/docker/mediaServer/Media:/data     # ✅
+```
+
+...instead of the obvious-looking:
+
+```yaml
+- .../Media/downloads:/downloads              # ❌
+- .../Media/tv:/tv
+- .../Media/movies:/movies
+```
+
+Hardlinks can't cross mount points **inside a container**, even when both paths sit on the
+same physical volume. With split mounts every import is a full file copy: disk usage
+doubles until the torrent is deleted, and large files take minutes to import. With one
+mount the import is instant, costs no extra space, and the torrent keeps seeding.
+
+To check which one you're getting, compare inodes after an import:
+
+```bash
+docker exec radarr sh -c 'find /data/downloads /data/movies -type f -name "*.mkv" -exec stat -c "%h  ino=%i  %n" {} +'
+```
+
+The same `ino=` appearing twice, with a link count of `2`, means hardlinks are working.
+
+---
+
 ## 📦 Container Notes
 
 ### [Plex](https://hub.docker.com/r/linuxserver/plex)
