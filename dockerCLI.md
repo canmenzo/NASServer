@@ -15,7 +15,7 @@ docker run -d \
   --net=host \
   -e PUID=1000 \
   -e PGID=1000 \
-  -e TZ=GMT/UTC \
+  -e TZ=Etc/UTC \
   -e VERSION=docker \
   -e PLEX_CLAIM=claim-xxxxxxxxxxxxxxxxxxxx \
   -v /volume1/docker/plex/data:/config \
@@ -28,7 +28,7 @@ docker run -d \
   --name=radarr \
   -e PUID=1000 \
   -e PGID=1000 \
-  -e TZ=GMT/UTC \
+  -e TZ=Etc/UTC \
   -p 7878:7878 \
   -v /volume1/docker/radarr/data:/config \
   -v /volume1/docker/mediaServer/Media:/data \
@@ -40,7 +40,7 @@ docker run -d \
   --name=overseerr \
   -e PUID=1000 \
   -e PGID=1000 \
-  -e TZ=GMT/UTC \
+  -e TZ=Etc/UTC \
   -p 5055:5055 \
   -v /volume1/docker/overseerr/data:/config \
   --restart unless-stopped \
@@ -51,7 +51,7 @@ docker run -d \
   --name=prowlarr \
   -e PUID=1000 \
   -e PGID=1000 \
-  -e TZ=GMT/UTC \
+  -e TZ=Etc/UTC \
   -p 9696:9696 \
   -v /volume1/docker/prowlarr/data:/config \
   --restart unless-stopped \
@@ -63,7 +63,7 @@ docker run -d \
   --name=sonarr \
   -e PUID=1000 \
   -e PGID=1000 \
-  -e TZ=GMT/UTC \
+  -e TZ=Etc/UTC \
   -p 8989:8989 \
   -v /volume1/docker/sonarr/data:/config \
   -v /volume1/docker/mediaServer/Media:/data \
@@ -76,7 +76,7 @@ docker run -d \
   --name=qbittorrent \
   -e PUID=1000 \
   -e PGID=1000 \
-  -e TZ=GMT/UTC \
+  -e TZ=Etc/UTC \
   -e WEBUI_PORT=8080 \
   -e TORRENTING_PORT=6881 \
   -p 8080:8080 \

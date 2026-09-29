@@ -12,7 +12,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=GMT/UTC
+      - TZ=Etc/UTC
     volumes:
       - /volume1/docker/prowlarr/data:/config
     ports:
@@ -27,7 +27,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=GMT/UTC
+      - TZ=Etc/UTC
     volumes:
       - /volume1/docker/radarr/data:/config
       - /volume1/docker/mediaServer/Media:/data
@@ -43,7 +43,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=GMT/UTC
+      - TZ=Etc/UTC
     volumes:
       - /volume1/docker/mediaServer/sonarr/data:/config
       - /volume1/docker/mediaServer/Media:/data
@@ -60,7 +60,7 @@ services:
       - PUID=1000
       - PGID=1000
       - WEBUI_PORT=8080
-      - TZ=GMT/UTC
+      - TZ=Etc/UTC
     volumes:
       - /volume1/docker/mediaServer/qbittorent/data:/config
       - /volume1/docker/mediaServer/Media:/data
@@ -78,7 +78,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=GMT/UTC
+      - TZ=Etc/UTC
     volumes:
       - /volume1/docker/mediaServer/overseerr/data:/config
     ports:

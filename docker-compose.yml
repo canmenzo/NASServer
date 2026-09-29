@@ -15,7 +15,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=GMT/UTC
+      - TZ=Etc/UTC
       - WEBUI_PORT=8080
       - TORRENTING_PORT=6881
     volumes:
@@ -33,7 +33,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=GMT/UTC
+      - TZ=Etc/UTC
     volumes:
       - /volume1/docker/sonarr/data:/config
       - /volume1/docker/mediaServer/Media:/data
@@ -45,9 +45,9 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
-      - PUID=1026
-      - PGID=101
-      - TZ=GMT/UTC
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
     volumes:
       - /volume1/docker/radarr/data:/config
       - /volume1/docker/mediaServer/Media:/data
